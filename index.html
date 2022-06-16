@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+.svgRect {
+    stroke: none;
+    fill: #f00;
+}
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 50px;
+  font-size: 50px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 50px;
+  padding: 50px;
+  font-size: 50px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  font-size: 70px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+</style>
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn">Select Year</button>
+        <div class="dropdown-content">
+          <a href="#" id="bt1">2011</a>
+          <a href="#" id="bt2">2012</a>
+          <a href="#" id="bt3">2013</a>
+          <a href="#" id="bt4">2014</a>
+          <a href="#" id="bt5">2015</a>
+          <a href="#" id="bt6">2016</a>
+          <a href="#" id="bt7">2017</a>
+          <a href="#" id="bt8">2018</a>
+          <a href="#" id="bt9">2019</a>
+          <a href="#" id="bt10">2020</a>
+        </div>
+      </div>
+<svg id="chart" viewBox="0 0 960 500"></svg>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script>
+let data = [
+    {student: "Murder", score: 16},
+    {student: "Serious Hurt", score: 406},
+    {student: "Rape", score: 150},
+    {student: "Outrage Of Modesty", score: 1396},
+    {student: "Rioting", score: 172},
+    {student: "Robbery", score: 394},
+    {student: "Housebreaking", score: 637},
+    {student: "Theft Of Motor Vehicle", score: 673},
+    {student: "Snatch Theft", score: 349},
+    {student: "Cheating Related Offences", score: 3819},
+];
+let data2 = [
+    {student: "Murder", score: 11},
+    {student: "Serious Hurt", score: 452},
+    {student: "Rape", score: 133},
+    {student: "Outrage Of Modesty", score: 1420},
+    {student: "Rioting", score: 191},
+    {student: "Robbery", score: 290},
+    {student: "Housebreaking", score: 545},
+    {student: "Theft Of Motor Vehicle", score: 586},
+    {student: "Snatch Theft", score: 286},
+    {student: "Cheating Related Offences", score: 3419},
+];
+let data3 = [
+    {student: "Murder", score: 16},
+    {student: "Serious Hurt", score: 476},
+    {student: "Rape", score: 120},
+    {student: "Outrage Of Modesty", score: 1325},
+    {student: "Rioting", score: 162},
+    {student: "Robbery", score: 254},
+    {student: "Housebreaking", score: 507},
+    {student: "Theft Of Motor Vehicle", score: 404},
+    {student: "Snatch Theft", score: 239},
+    {student: "Cheating Related Offences", score: 3695},
+];
+let data4 = [
+    {student: "Murder", score: 14},
+    {student: "Serious Hurt", score: 513},
+    {student: "Rape", score: 164},
+    {student: "Outrage Of Modesty", score: 1372},
+    {student: "Rioting", score: 168},
+    {student: "Robbery", score: 230},
+    {student: "Housebreaking", score: 311},
+    {student: "Theft Of Motor Vehicle", score: 314},
+    {student: "Snatch Theft", score: 165},
+    {student: "Cheating Related Offences", score: 5465},
+];
+let data5 = [
+    {student: "Murder", score: 14},
+    {student: "Serious Hurt", score: 473},
+    {student: "Rape", score: 152},
+    {student: "Outrage Of Modesty", score: 1294},
+    {student: "Rioting", score: 114},
+    {student: "Robbery", score: 123},
+    {student: "Housebreaking", score: 250},
+    {student: "Theft Of Motor Vehicle", score: 302},
+    {student: "Snatch Theft", score: 84},
+    {student: "Cheating Related Offences", score: 8242},
+];
+let data6 = [
+    {student: "Murder", score: 18},
+    {student: "Serious Hurt", score: 492},
+    {student: "Rape", score: 149},
+    {student: "Outrage Of Modesty", score: 1282},
+    {student: "Rioting", score: 112},
+    {student: "Robbery", score: 96},
+    {student: "Housebreaking", score: 212},
+    {student: "Theft Of Motor Vehicle", score: 165},
+    {student: "Snatch Theft", score: 63},
+    {student: "Cheating Related Offences", score: 8268},
+];
+let data7 = [
+    {student: "Murder", score: 8},
+    {student: "Serious Hurt", score: 420},
+    {student: "Rape", score: 185},
+    {student: "Outrage Of Modesty", score: 1561},
+    {student: "Rioting", score: 103},
+    {student: "Robbery", score: 69},
+    {student: "Housebreaking", score: 160},
+    {student: "Theft Of Motor Vehicle", score: 143},
+    {student: "Snatch Theft", score: 49},
+    {student: "Cheating Related Offences", score: 8364},
+];
+let data8 = [
+    {student: "Murder", score: 9},
+    {student: "Serious Hurt", score: 429},
+    {student: "Rape", score: 213},
+    {student: "Outrage Of Modesty", score: 1728},
+    {student: "Rioting", score: 107},
+    {student: "Robbery", score: 72},
+    {student: "Housebreaking", score: 204},
+    {student: "Theft Of Motor Vehicle", score: 114},
+    {student: "Snatch Theft", score: 48},
+    {student: "Cheating Related Offences", score: 9193},
+];
+let data9 = [
+    {student: "Murder", score: 11},
+    {student: "Serious Hurt", score: 373},
+    {student: "Rape", score: 281},
+    {student: "Outrage Of Modesty", score: 1605},
+    {student: "Rioting", score: 94},
+    {student: "Robbery", score: 55},
+    {student: "Housebreaking", score: 186},
+    {student: "Theft Of Motor Vehicle", score: 85},
+    {student: "Snatch Theft", score: 35},
+    {student: "Cheating Related Offences", score: 12363},
+];
+let data10 = [
+    {student: "Murder", score: 8},
+    {student: "Serious Hurt", score: 445},
+    {student: "Rape", score: 348},
+    {student: "Outrage Of Modesty", score: 1320},
+    {student: "Rioting", score: 59},
+    {student: "Robbery", score: 37},
+    {student: "Housebreaking", score: 164},
+    {student: "Theft Of Motor Vehicle", score: 60},
+    {student: "Snatch Theft", score: 18},
+    {student: "Cheating Related Offences", score: 16523},
+];
+
+
+let margin = {top: 20, right: 20, bottom: 40, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+let chart = d3.select("#chart")
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+// Add scales
+let xScale = d3.scaleBand()
+    .domain(data.map(function(d) { return d.student; }))
+    .rangeRound([0, width])
+    .padding(0.1);
+let yScale = d3.scaleLinear()
+    .domain([0, 17000])
+    .rangeRound([height, 0]);
+// Add x-axis
+chart.append("g")
+    .attr("class", "axis axis-x")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(xScale));
+// Add y-axis
+chart.append("g")
+    .attr("class", "axis axis-y")
+    .call(d3.axisLeft(yScale).ticks(10));
+    
+//Sample enter, update and exit loop
+function drawChart(dataSet) {
+
+//xScale domain needs to change based on data set
+xScale.domain(dataSet.map(function(d) { return d.student; }));
+chart.select("g .axis-x")
+    .transition()
+    .duration(1000)
+    .call(d3.axisBottom(xScale));
+
+chart.selectAll("rect")
+    .data(dataSet)
+    .join(
+    enter => enter
+        .append("rect")
+        .attr("x", d => xScale(d.student))
+        .attr("y", d => yScale(d.score))
+        .attr("width", 0)
+        .attr("height", 0)
+        .attr("class", "svgRect")
+      .call(enter => enter.transition()
+        .duration(1000)
+        .attr("width", xScale.bandwidth())
+        .attr("height", d => height - yScale(d.score))
+       ),
+    update => update 
+      .call(update => update.transition()
+        .duration(1000)
+        .attr("x", d => xScale(d.student))
+        .attr("y", d => yScale(d.score))
+        .attr("width", xScale.bandwidth())
+        .attr("height", d => height - yScale(d.score))
+       ),
+    exit => exit
+      .call(exit => exit.transition()
+        .duration(1000)
+        .attr("width", 0)
+        .attr("height", 0)
+        .remove()
+       )
+    );
+}
+d3.select("#bt1").on("click", function() {
+    drawChart(data);
+});
+d3.select("#bt2").on("click", function() {
+    drawChart(data2);
+});
+d3.select("#bt3").on("click", function() {
+    drawChart(data3);
+});
+d3.select("#bt4").on("click", function() {
+    drawChart(data4);
+});
+d3.select("#bt5").on("click", function() {
+    drawChart(data5);
+});
+d3.select("#bt6").on("click", function() {
+    drawChart(data6);
+});
+d3.select("#bt7").on("click", function() {
+    drawChart(data7);
+});
+d3.select("#bt8").on("click", function() {
+    drawChart(data8);
+});
+d3.select("#bt9").on("click", function() {
+    drawChart(data9);
+});
+d3.select("#bt10").on("click", function() {
+    drawChart(data10);
+});
+drawChart(data);
+</script>
+</body>
+</html>
